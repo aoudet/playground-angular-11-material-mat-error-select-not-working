@@ -24,7 +24,9 @@ export class AppComponent {
       (g): ValidationErrors | null => {
         const mustHaveCat =
           Boolean(g.get('chck').value === true) &&
-          Boolean(g.get('category').value === -1);
+          Boolean(
+            g.get('category').value === -1 || g.get('category').value === null
+          );
         return mustHaveCat ? { catMissing: true } : null;
       }
     ),
@@ -42,5 +44,8 @@ export class AppComponent {
 
   onSubmit() {
     console.log('submitted', (this.gpe as FormGroup)?.value);
+  }
+  reset() {
+    this.gpe.reset();
   }
 }
